@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![R build
+status](https://github.com/jjesusfilho/tesesusp/workflows/R-CMD-check/badge.svg)](https://github.com/jjesusfilho/tesesusp/actions)
 <!-- badges: end -->
 
 O objetivo deste pacote é baixar dados de teses e dissertações da USP

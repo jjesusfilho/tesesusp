@@ -1,0 +1,293 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="pt-br" lang="pt-br" >
+<head>
+  <title>Decomposição de séries temporais preservando o viés determinístico</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Avanços tecnológicos possibilitaram a coleta e modelagem de grandes quantidades de dados produzidos ao longo do tempo por fenômenos industriais, humanos e naturais. Em se tratando de séries temporais,..." />
+  <meta name="keywords" content="Análise de séries temporais, Decomposição de séries temporais, Predição de séries temporais, Séries temporais, Time series, Time series analysis, Time series decomposition, Time series prediction" />
+  <meta name="generator" content="Biblioteca Digital de Teses e Disserta&ccedil;&otilde;es da USP" />
+  <meta name="date" content="2020-03-16T17:09:02-03:00" />
+  <link rel="shortcut icon" href="/templates/bdtd/favicon.ico" />
+  <link href="/templates/bdtd/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/modules/mod_jflanguageselection/tmpl/mod_jflanguageselection.css" type="text/css" />
+  <script type="text/javascript" src="/media/system/js/mootools.js"></script>
+  <script type="text/javascript" src="/media/system/js/caption.js"></script>
+  <link rel="stylesheet" href="/templates/bdtd/css/design.css" type="text/css" />
+  <link rel="stylesheet" href="/templates/bdtd/css/servicos.css" type="text/css" />
+  <link rel="stylesheet" href="/templates/bdtd/css/documento.css" type="text/css" />
+  <link rel="stylesheet" href="/estante/site/lib/jquery/css/flick/jquery-ui.css" type="text/css" />
+  <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+  <meta name="DC.language" content="por" xml:lang="pt-br" scheme="DCTERMS.RFC1766" />
+  <meta name="DC.creator" content="Duarte, Felipe Simões Lage Gomes" xml:lang="pt-br" />
+
+  <meta name="DC.contributor" content="Mello, Rodrigo Fernandes de" xml:lang="pt-br" />
+
+  <meta name="DC.contributor" content="Hruschka, Eduardo Raul" xml:lang="pt-br" />
+
+  <meta name="DC.title" content="Decomposição de séries temporais preservando o viés determinístico" xml:lang="pt-br" />
+
+  <meta name="DC.title" content="Time series decomposition while preserving deterministic influences" xml:lang="en" />
+
+  <meta name="DCTERMS.abstract" content="Avanços tecnológicos possibilitaram a coleta e modelagem de grandes quantidades de dados produzidos ao longo do tempo por fenômenos industriais, humanos e naturais. Em se tratando de séries temporais, tais dados são compostos por influências determinísticas, relacionadas a eventos recorrentes e unicamente dependentes de observações passadas, e estocásticas, associadas a efeitos aleatórios. Modelos produzidos com base em apenas uma dessas influências tendem a produzir resultados sub-ótimos e incompletos. Portanto, idealmente, deve-se modelar o componente estocástico por meio de ferramentas estatísticas e o determinístico utilizando ferramentas da área de Sistemas Dinâmicos. Esse cenário leva à inerente necessidade da decomposição de dados temporais, em busca de modelos mais acurados e melhores resultados de predição. Diversas abordagens têm sido utilizadas para realizar tal decomposição, tais como: (i) Transformada de Fourier; (ii) Transformadas Wavelet; (iii) Médias Móveis; (iv) Análise Espectral Singular; (v) Lazy; (vi) GHKSS; e (vii) outras abordagens baseadas no método de decomposição de modo empírico (EMD Empirical Mode Decomposition). Tais abordagens apresentam problemas associados à imposição de viés definido pelos seus conjuntos de funções admissíveis, sendo que o senoidal é predominante sobre o componente determinístico resultante, descaracterizando o viés original dos dados e levando a modelagens sub-ótimas, consequentemente gerando resultados insatisfatórios para o processo de predição. Neste contexto, esta tese de doutorado introduz três abordagens de decomposição de séries temporais que visam preservar, ao máximo, as influências determinísticas por meio da utilização de espaços-fase, resultando em representações mais fiéis do viés original dos dados: (i) Spring, (ii) Spring Time Domain e (iii) Spring*. Essas abordagens foram experimentalmente avaliadas e comparadas ao estado da arte com base em métricas comumente adotadas na literatura, mais precisamente: Média do Erro Absoluto (do inglês Mean Absolute Error MAE) e Distância Média da Linha Diagonal (do inglês Mean Distance from Diagonal Line MDDL). Spring e suas variantes comprovaram ser mais eficazes para a segmentação entre influências determinísticas e estocásticas, naturalmente levando à melhoria do processo de modelagem e predição de séries temporais. Por fim, para validar a hipótese de que as decomposições propostas melhoram resultados de predição, as abordagens foram conectadas às técnicas de modelagem polinomial e de funções de base radial, permitindo reduzir significativamente erros decorrentes do processo de previsão." xml:lang="pt-br" />
+
+  <meta name="DCTERMS.abstract" content="Technological advances allowed to collect and model large scales of data produced along time by industrial, human and natural phenomena. In terms of time series, such data are composed of deterministic, solely based on past observations or associated to recurrent events, and stochastic influences, due to random effects. Models using only one of those influences tend to produce suboptimal and incomplete results. Therefore, one should ideally model the stochastic component using Statistical tools and the deterministic one with Dynamical Systems. This scenario leads us to the decomposition of time series in attempt to obtain more accurate models and best prediction results. Several approaches have been applied to address such decomposition stage, including: (i) Fourier Transform; (ii) Wavelet Transform; (iii) Moving Average; (iv) Singular Spectrum Analysis; (v) Lazy; (vi) GHKSS; and (vii) other approaches based on the Empirical Mode Decomposition (EMD). Those approaches have drawbacks related to the bias imposed by their respective sets of admissible functions, having the sinusoidal as the typical to represent the deterministic component extracted, thus loosing the original time series bias, what leads to sub-optimal models and insatisfactory prediction results. In this context, this PhD thesis introduces three time series decompositions approaches that aim to preserve as much as possible the deterministic influences by using phase-spaces, what helps maintaining the original data bias, to mention: (i) Spring, (ii) Spring Time Domain e (iii) Spring*. Those approaches were experimentally assessed and compared against the state-of-the-art through measurements commonly used in the literature, more precisely: Mean Absolute Error (MAE) and Mean Distance from Diagonal Line (MDDL). Spring and its variations confirmed to be more effective to separate deterministic and stochastic influences, thus improving the modeling and prediction processes. At last, the proposed decomposition approaches were plugged into the polynomial and the radial basis function prediction techniques to confirm the hypothesis that the forecasting of series observations could be more accurate what was corroborated given errors were overall reduced." xml:lang="en" />
+
+
+  <meta name="DC.subject" content="Análise de séries temporais" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Decomposição de séries temporais" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Predição de séries temporais" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Séries temporais" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Time series" xml:lang="en" />
+
+  <meta name="DC.subject" content="Time series analysis" xml:lang="en" />
+
+  <meta name="DC.subject" content="Time series decomposition" xml:lang="en" />
+
+  <meta name="DC.subject" content="Time series prediction" xml:lang="en" />
+
+  <meta name="DC.description" content="Tese de Doutorado" xml:lang="pt-br" />
+  <meta name="DC.description" content="Doctoral Thesis" xml:lang="en" />
+  <meta name="DC.description" content="Instituto de Ciências Matemáticas e de Computação, 2020" xml:lang="pt-br" />
+  <meta name="DC.type" content="text" xml:lang="en" />
+  <meta name="DC.publisher" content="Biblioteca Digital de Teses e Dissertações da Universidade de São Paulo" xml:lang="pt-br" />
+  <meta name="DC.publisher" content="Universidade de São Paulo" xml:lang="pt-br" />
+  <meta name="DC.date" content="2020" xml:lang="pt-br" />
+  <meta name="DCTERMS.issued" content="2020-01-13" xml:lang="pt-br" />
+  <meta name="DCTERMS.available" content="2020-03-16" xml:lang="pt-br" />
+  <meta name="DC.identifier" content="tde-16032020-170344" xml:lang="pt-br" />
+
+  <meta name="DC.identifier" content="doi:10.11606/T.55.2020.tde-16032020-170344" xml:lang="pt-br" />
+
+
+  <meta name="citation_language" content="pt-br" />
+  <meta name="citation_title" content="Decomposição de séries temporais preservando o viés determinístico" />
+  <meta name="citation_keywords" content="Análise de séries temporais; Decomposição de séries temporais; Predição de séries temporais; Séries temporais" />
+  <meta name="citation_publication_date" content="2020-01-13" />
+  <meta name="citation_online_date" content="2020" />
+  <meta name="citation_author" content="Duarte, Felipe Simões Lage Gomes" />
+  <meta name="citation_dissertation_institution" content="Universidade de São Paulo" />
+  <meta name="citation_publisher" content="Biblioteca Digital de Teses e Dissertações da Universidade de São Paulo" />
+  <meta name="citation_abstract_html_url" content="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-16032020-170344/" />
+
+  <meta name="citation_pdf_url" content="http://www.teses.usp.br/teses/disponiveis/55/55134/tde-16032020-170344/publico/FelipeSimoesLageGomesDuarte_revisada.pdf" />
+
+
+  <meta name="citation_doi" content="10.11606/T.55.2020.tde-16032020-170344" />
+
+
+  <script type="text/javascript" src="/templates/bdtd/js/nospam.js"></script>
+  <script type="text/javascript" src="/templates/bdtd/js/jquery-latest.js"></script>
+  <script type="text/javascript" src="/estante/site/lib/jquery/jquery-ui.min.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="/barra/barra.js"  charset="utf-8"></script>
+<div id="Site">
+  <div id="SiteBackground">
+    <div id="Cabecalho">
+      <div id="CabecalhoBarraUSP">&nbsp;</div>
+      <div id="CabecalhoTeses"><a id="HomeLink" href="/?lang=pt-br" title="Home"></a></div>
+      <div id="CabecalhoImagens">
+        <div class="moduletable"><noscript><div class="message">Sorry, but Javascript is not enabled in your browser!</div></noscript>
+<script language="javascript" type="text/javascript">
+<!--
+var embedSIRCSS = '<' + 'style type="text/css" media="all">'
++ '@import "/modules/mod_jw_sir/mod_jw_sir/mod_jw_sir.css";'
++ 'ul#jw-sir,ul#jw-sir li#jw-sir-loading {width:167px;height:69px;}'
++ '</' + 'style>';
+document.write(embedSIRCSS);
+-->
+</script>
+<script type="text/javascript" src="/modules/mod_jw_sir/mod_jw_sir/mod_jw_sir.js"></script>
+<script type="text/javascript">var delay=5000;var transition=40;var preLoader='jw-sir-loading';</script>
+<ul id="jw-sir" class="">
+  <li id="jw-sir-loading"></li><li><img src="/templates/bdtd/banner/foto06.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto07.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto04.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto02.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto01.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto09.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto03.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto05.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto10.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto08.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li></ul>
+        </div>
+      </div>
+    </div>
+    <div id="Corpo">
+      <div class="CorpoDivisao">
+        <div id="CorpoMenuTopo">&nbsp;</div>
+      </div>
+      <div class="CorpoDivisao">
+        <div id="CorpoReferencia"><span class="breadcrumbs pathway"><a href="/?&amp;lang=pt-br" class="pathway">Inic&iacute;o</a></span></div>
+        <div id="CorpoIdioma"><div id="jflanguageselection"><div class="rawimages"><span id="active_language"><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-16032020-170344/?&amp;lang=pt-br"><img src="/components/com_joomfish/images/flags/pt-br.gif" alt="Português (Brasil)" title="Português (Brasil)" /></a></span><span ><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-16032020-170344/?&amp;lang=en"><img src="/components/com_joomfish/images/flags/en.gif" alt="English (United Kingdom)" title="English (United Kingdom)" /></a></span><span ><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-16032020-170344/?&amp;lang=es"><img src="/components/com_joomfish/images/flags/es.gif" alt="EspañSpanish Formal International)" title="EspañSpanish Formal International)" /></a></span><span ><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-16032020-170344/?&amp;lang=fr"><img src="/components/com_joomfish/images/flags/fr.gif" alt="French (Fr)" title="French (Fr)" /></a></span></div></div>
+        </div>
+      </div>
+      <div class="CorpoDivisao">
+        <div class="CorpoEstante">&nbsp;
+<!-- AddThis Button BEGIN -->
+<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4e9871e452a1ada6"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0" /></a>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e9871e452a1ada6"></script>
+<!-- AddThis Button END -->
+        </div>
+        <div class="bdPanel"><script type="text/javascript" src="http://www.teses.usp.br/estante/widget/estanteWidget.js"></script>
+          <div id="estante"></div>
+          <form action="" method="post">
+            <input type="hidden" name="evAutor" value="Duarte, Felipe Simões Lage Gomes" />
+            <input type="hidden" name="evTitulo" value="Decomposição de séries temporais preservando o viés determinístico" />
+            <input type="hidden" name="evAno" value="2020" />
+            <input type="hidden" name="evID" value="tde-16032020-170344" />
+            <input type="hidden" name="evIdioma" value="pt-br" />
+          </form>
+        </div>
+      </div>
+      <div class="CorpoDivisao">
+        <div class="CorpoServico">&nbsp;</div>
+        <div class="bdPanelServico">
+          <br />
+          <br />
+          <div class="menuTabServico"><a id="toogleServico" href="javascript: void(0);"><img src="/templates/bdtd/images/add.png" alt="Servi&ccedil;os" title="Servi&ccedil;os" border="0" /></a></div>
+          <div class="menuPanelServico" id="menuServico">
+            <div class="conteudoPanel">
+              <div class="menuTitulo">Servi&ccedil;os</div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="#referencias">Trabalhos decorrentes</a></div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="javascript: void(0);">Estatist&iacute;cas</a></div>
+              <div class="menuItem">&nbsp;&nbsp;<div class="menuItemTitulo"><a href="javascript: window.open('/stats.php?id=tde-16032020-170344&amp;t=v&amp;lang=pt-br','','');"><img width="12" height="13" src="/images/chart_bar.png" alt="Visitas" border="0" /> Visitas</a></div><div class="menuItemValor">128</div></div>
+              <div class="menuItem">&nbsp;&nbsp;<div class="menuItemTitulo"><a href="javascript: window.open('/stats.php?id=tde-16032020-170344&amp;t=d&amp;lang=pt-br','','');"><img width="12" height="13" src="/images/chart_bar.png" alt="Downloads" border="0" /> Downloads</a></div><div class="menuItemValor">88</div></div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="javascript: window.open('/cite.php?id=tde-16032020-170344&amp;lang=pt-br','','width=640,height=480,resizable=yes,scrollbars=1,menubar=no');">Como citar</a></div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="javascript: window.open('/marc.php?id=tde-16032020-170344&amp;lang=pt-br','','width=640,height=480,resizable=yes,scrollbars=1,menubar=no');">Formato MARC</a></div>
+              <div class="menuItem"><a href="javascript: window.open('/xml.php?id=tde-16032020-170344','','width=640,height=480,resizable=yes,scrollbars=1,menubar=no');">Formato OAI DC</a></div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          $("#toogleServico").click(function () {
+	    $("#menuServico").slideToggle("fast");
+	  });
+        </script>
+        <div class="CorpoServicoDivisao">&nbsp;</div>
+      </div>
+      <div class="CorpoDivisao">
+        <div id="CorpoConteudoDocumento">
+          <div id="CorpoTexto">
+<div class="DocumentoTitulo">Tese de Doutorado</div>
+
+<div class="DocumentoTituloTexto">DOI</div><div class="DocumentoTexto">https://doi.org/10.11606/T.55.2020.tde-16032020-170344</div>
+
+<div class="DocumentoTituloTexto">Documento</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=12&amp;Itemid=77&amp;lang=pt-br">Tese de Doutorado</a></div>
+<div class="DocumentoTituloTexto">Autor</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=17&amp;Itemid=160&amp;id=37A6C2FC5B23&amp;lang=pt-br">Duarte, Felipe Simões Lage Gomes</a> (<a href="http://dedalus.usp.br/F/?func=scan&amp;scan_code=AUT&amp;scan_start=Duarte, Felipe Simões Lage Gomes" target="_blank">Cat&aacute;logo USP</a>)</div>
+<div class="DocumentoTituloTexto">Nome completo</div><div class="DocumentoTexto">Felipe Simões Lage Gomes Duarte</div>
+
+<div class="DocumentoTituloTexto">E-mail</div><div class="DocumentoTexto"><a href="JavaScript:;" onclick="JavaScript: showEmail('fgduarte','icmc.usp.br');" onmouseover="JavaScript: window.defaultStatus='E-mail';">E-mail</a></div>
+
+<div class="DocumentoTituloTexto">Unidade da USP</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=30&amp;Itemid=162&amp;id=55&amp;lang=pt-br">Instituto de Ciências Matemáticas e de Computação</a></div>
+<div class="DocumentoTituloTexto">&Aacute;rea do Conhecimento</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=9&amp;Itemid=159&amp;id=55134&amp;prog=55002&amp;exp=0&amp;lang=pt-br">Ciências de Computação e Matemática Computacional</a></div>
+<div class="DocumentoTituloTexto">Data de Defesa</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=29&amp;Itemid=158&amp;id=2020&amp;lang=pt-br">2020-01-13</a></div>
+<div class="DocumentoTituloTexto">Imprenta</div><div class="DocumentoTexto">São Carlos, 2020</div>
+
+<div class="DocumentoTituloTexto">Orientador</div><div class="DocumentoTexto">
+
+<a href="/index.php?option=com_jumi&amp;fileid=14&amp;Itemid=161&amp;id=57A3BD7DD325&amp;lang=pt-br">Mello, Rodrigo Fernandes de</a> (<a href="http://dedalus.usp.br/F/?func=scan&amp;scan_code=AUT&amp;scan_start=Mello, Rodrigo Fernandes de" target="_blank">Cat&aacute;logo USP</a>)<br />
+
+<a href="/index.php?option=com_jumi&amp;fileid=14&amp;Itemid=161&amp;id=E7A5FB25152E&amp;lang=pt-br">Hruschka, Eduardo Raul - (Coorientador)</a> (<a href="http://dedalus.usp.br/F/?func=scan&amp;scan_code=AUT&amp;scan_start=Hruschka, Eduardo Raul" target="_blank">Cat&aacute;logo USP</a>)<br />
+
+</div>
+
+
+<div class="DocumentoTituloTexto">Banca examinadora</div><div class="DocumentoTexto">
+
+Hruschka, Eduardo Raul (Presidente)<br />
+
+Izbicki, Rafael<br />
+
+Rodrigues, Francisco Aparecido<br />
+
+Silva, Diego Furtado<br />
+
+</div>
+
+<div class="DocumentoTituloTexto">T&iacute;tulo em portugu&ecirc;s</div><div class="DocumentoTexto">Decomposição de séries temporais preservando o viés determinístico</div>
+
+<div class="DocumentoTituloTexto">Palavras-chave em portugu&ecirc;s</div><div class="DocumentoTexto">
+
+Análise de séries temporais<br />
+
+Decomposição de séries temporais<br />
+
+Predição de séries temporais<br />
+
+Séries temporais<br />
+
+</div>
+
+<div class="DocumentoTituloTexto2">Resumo em portugu&ecirc;s</div>
+<div class="DocumentoTextoResumo">Avanços tecnológicos possibilitaram a coleta e modelagem de grandes quantidades de dados produzidos ao longo do tempo por fenômenos industriais, humanos e naturais. Em se tratando de séries temporais, tais dados são compostos por influências determinísticas, relacionadas a eventos recorrentes e unicamente dependentes de observações passadas, e estocásticas, associadas a efeitos aleatórios. Modelos produzidos com base em apenas uma dessas influências tendem a produzir resultados sub-ótimos e incompletos. Portanto, idealmente, deve-se modelar o componente estocástico por meio de ferramentas estatísticas e o determinístico utilizando ferramentas da área de Sistemas Dinâmicos. Esse cenário leva à inerente necessidade da decomposição de dados temporais, em busca de modelos mais acurados e melhores resultados de predição. Diversas abordagens têm sido utilizadas para realizar tal decomposição, tais como: (i) Transformada de Fourier; (ii) Transformadas Wavelet; (iii) Médias Móveis; (iv) Análise Espectral Singular; (v) Lazy; (vi) GHKSS; e (vii) outras abordagens baseadas no método de decomposição de modo empírico (EMD  Empirical Mode Decomposition). Tais abordagens apresentam problemas associados à imposição de viés definido pelos seus conjuntos de funções admissíveis, sendo que o senoidal é predominante sobre o componente determinístico resultante, descaracterizando o viés original dos dados e levando a modelagens sub-ótimas, consequentemente gerando resultados insatisfatórios para o processo de predição. Neste contexto, esta tese de doutorado introduz três abordagens de decomposição de séries temporais que visam preservar, ao máximo, as influências determinísticas por meio da utilização de espaços-fase, resultando em representações mais fiéis do viés original dos dados: (i) Spring, (ii) Spring Time Domain e (iii) Spring*. Essas abordagens foram experimentalmente avaliadas e comparadas ao estado da arte com base em métricas comumente adotadas na literatura, mais precisamente: Média do Erro Absoluto (do inglês Mean Absolute Error  MAE) e Distância Média da Linha Diagonal (do inglês Mean Distance from Diagonal Line  MDDL). Spring e suas variantes comprovaram ser mais eficazes para a segmentação entre influências determinísticas e estocásticas, naturalmente levando à melhoria do processo de modelagem e predição de séries temporais. Por fim, para validar a hipótese de que as decomposições propostas melhoram resultados de predição, as abordagens foram conectadas às técnicas de modelagem polinomial e de funções de base radial, permitindo reduzir significativamente erros decorrentes do processo de previsão.</div>
+
+<div class="DocumentoTituloTexto">T&iacute;tulo em ingl&ecirc;s</div><div class="DocumentoTexto">Time series decomposition while preserving deterministic influences</div>
+
+<!-- BEGIN bl_palavras_chave_alternativo -->
+<div class="DocumentoTituloTexto">Palavras-chave em ingl&ecirc;s</div><div class="DocumentoTexto">
+
+Time series<br/>
+
+Time series analysis<br/>
+
+Time series decomposition<br/>
+
+Time series prediction<br/>
+
+</div>
+
+<div class="DocumentoTituloTexto2">Resumo em ingl&ecirc;s</div>
+<div class="DocumentoTextoResumo">Technological advances allowed to collect and model large scales of data produced along time by industrial, human and natural phenomena. In terms of time series, such data are composed of deterministic, solely based on past observations or associated to recurrent events, and stochastic influences, due to random effects. Models using only one of those influences tend to produce suboptimal and incomplete results. Therefore, one should ideally model the stochastic component using Statistical tools and the deterministic one with Dynamical Systems. This scenario leads us to the decomposition of time series in attempt to obtain more accurate models and best prediction results. Several approaches have been applied to address such decomposition stage, including: (i) Fourier Transform; (ii) Wavelet Transform; (iii) Moving Average; (iv) Singular Spectrum Analysis; (v) Lazy; (vi) GHKSS; and (vii) other approaches based on the Empirical Mode Decomposition (EMD). Those approaches have drawbacks related to the bias imposed by their respective sets of admissible functions, having the sinusoidal as the typical to represent the deterministic component extracted, thus loosing the original time series bias, what leads to sub-optimal models and insatisfactory prediction results. In this context, this PhD thesis introduces three time series decompositions approaches that aim to preserve as much as possible the deterministic influences by using phase-spaces, what helps maintaining the original data bias, to mention: (i) Spring, (ii) Spring Time Domain e (iii) Spring*. Those approaches were experimentally assessed and compared against the state-of-the-art through measurements commonly used in the literature, more precisely: Mean Absolute Error (MAE) and Mean Distance from Diagonal Line (MDDL). Spring and its variations confirmed to be more effective to separate deterministic and stochastic influences, thus improving the modeling and prediction processes. At last, the proposed decomposition approaches were plugged into the polynomial and the radial basis function prediction techniques to confirm the hypothesis that the forecasting of series observations could be more accurate what was corroborated given errors were overall reduced.</div>
+
+<div class="DocumentoTituloTexto4">&nbsp;</div>
+<div class="DocumentoTituloTexto2"></div>
+
+<div class="DocumentoTituloTexto3"><b>AVISO - A consulta a este documento fica condicionada na aceita&ccedil;&atilde;o das seguintes condi&ccedil;&otilde;es de uso:</b><br />Este trabalho &eacute; somente para uso privado de atividades de pesquisa e ensino. N&atilde;o &eacute; autorizada sua reprodu&ccedil;&atilde;o para quaisquer fins lucrativos. Esta reserva de direitos abrange a todos os dados do documento bem como seu conte&uacute;do. Na utiliza&ccedil;&atilde;o ou cita&ccedil;&atilde;o de partes do documento &eacute; obrigat&oacute;rio mencionar nome da pessoa autora do trabalho.</div>
+
+
+<div class="DocumentoTituloTexto2"><a href="/teses/disponiveis/55/55134/tde-16032020-170344/publico/FelipeSimoesLageGomesDuarte_revisada.pdf">FelipeSimoesLageGomesDuarte_revisada.pdf</a>  (6.61 Mbytes)</div>
+
+
+
+
+<div class="DocumentoTituloTexto">Data de Publica&ccedil;&atilde;o</div><div class="DocumentoTexto">2020-03-16</div>
+<div class="DocumentoTituloTexto4">&nbsp;</div>
+<div class="CaixaReferencia">
+<div class="DocumentoTitulo"><a name="referencias">Trabalhos decorrentes</a></div>
+
+
+<div class="DocumentoTituloTexto3"><b>AVISO</b>: Saiba o que s&atilde;o os trabalhos decorrentes <a href='http://www.teses.usp.br/index.php?option=com_content&amp;view=article&amp;id=64&amp;Itemid=194&amp;lang=pt-br'>clicando aqui</a>.</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="Rodape">
+      <div id="Direitos">
+        <div class="moduletable">
+          <div>Todos os direitos da tese/disserta&ccedil;&atilde;o s&atilde;o de seus autores<br />
+          CeTI-SC/STI<br />
+          Biblioteca Digital de Teses e Disserta&ccedil;&otilde;es da USP. Copyright &#169; 2001-2020. Todos os direitos reservados.<br /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7046076-2");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+</body>
+</html>

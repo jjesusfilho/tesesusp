@@ -1,3 +1,6 @@
 ^tesesusp\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
+^\.github$
+^LICENSE\.md$
+^data-raw$

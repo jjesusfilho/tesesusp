@@ -1,0 +1,297 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="pt-br" lang="pt-br" >
+<head>
+  <title>Solução numérica do modelo Oldroyd-B para valores pequenos da razão de viscosidades:...</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Esse trabalho trata do desenvolvimento de um método numérico para simular escoamentos axissimétricos com superfícies livres modelados pela equação constitutiva Oldroyd-B. Uma nova metodologia utilizando..." />
+  <meta name="keywords" content="Diferenças finitas, Escoamentos viscoelásticos, Finite differences, Free surface, Oldroyd-B, Oldroyd-B, Superfície livre, UCM, UCM, Viscoelastic flows" />
+  <meta name="generator" content="Biblioteca Digital de Teses e Disserta&ccedil;&otilde;es da USP" />
+  <meta name="date" content="2020-09-08T18:33:02-03:00" />
+  <link rel="shortcut icon" href="/templates/bdtd/favicon.ico" />
+  <link href="/templates/bdtd/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/modules/mod_jflanguageselection/tmpl/mod_jflanguageselection.css" type="text/css" />
+  <script type="text/javascript" src="/media/system/js/mootools.js"></script>
+  <script type="text/javascript" src="/media/system/js/caption.js"></script>
+  <link rel="stylesheet" href="/templates/bdtd/css/design.css" type="text/css" />
+  <link rel="stylesheet" href="/templates/bdtd/css/servicos.css" type="text/css" />
+  <link rel="stylesheet" href="/templates/bdtd/css/documento.css" type="text/css" />
+  <link rel="stylesheet" href="/estante/site/lib/jquery/css/flick/jquery-ui.css" type="text/css" />
+  <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+  <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+  <meta name="DC.language" content="por" xml:lang="pt-br" scheme="DCTERMS.RFC1766" />
+  <meta name="DC.creator" content="Viezel, Caroline" xml:lang="pt-br" />
+
+  <meta name="DC.contributor" content="Tomé, Murilo Francisco" xml:lang="pt-br" />
+
+  <meta name="DC.title" content="Solução numérica do modelo Oldroyd-B para valores pequenos da razão de viscosidades: aplicação em escoamentos com superfícies livres" xml:lang="pt-br" />
+
+  <meta name="DC.title" content="Numerical solution of the Oldroyd-B model for small values of the viscosity ratio: application to free surface flows" xml:lang="en" />
+
+  <meta name="DCTERMS.abstract" content="Esse trabalho trata do desenvolvimento de um método numérico para simular escoamentos axissimétricos com superfícies livres modelados pela equação constitutiva Oldroyd-B. Uma nova metodologia utilizando o método de diferenças finitas para resolver as equações governantes de escoamentos de fluidos Oldroyd-B em que o parâmetro Î² pode assumir valores no intervalo [0; 1] é proposta. Assim, fazendo Î² = 0, esta técnica permite simular escoamentos de fluidos puramente elásticos governados pela equação constitutiva Upper Convected-Maxwell (UCM). Nessa nova estratégia, o tensor tensão extra é calculado em função do tensor conformação que é aproximado implicitamente pelo método de diferenças finitas cujas equações são resolvidas analiticamente. Para obter a solução da equação de conservação de quantidade de movimento e as condições de contorno na superfície livre, emprega-se uma transformação Elastic Viscous Stress Splitting (EVSS) que evita instabilidades numéricas quando Î² é pequeno. O código numérico é verificado utilizando uma solução analítica para escoamentos axissimétricos em um tubo e também, comparando resultados obtidos na literatura para os escoamentos impacting drop, inchamento do extrudado e inchamento retardado do extrudado de fluidos Oldroyd-B. Novos resultados desses escoamentos são apresentados utilizando o modelo UCM e resultados originais obtidos da simulação dos escoamentos bouncing drops e inchamento retardado do extrudado de fluidos UCM são incluídos; os resultados existentes são decorrentes de modelos viscoelásticos com adição de solventes, como por exemplo, Oldroyd-B, Phan-Thien-Tanner (PTT), FENE-P (Finitely Extensibility Nonlinear Elastic), entre outros." xml:lang="pt-br" />
+
+  <meta name="DCTERMS.abstract" content="This work deals with the development of a numerical method to simulate axisymmetric free surface flows governed by the constitutive equation Oldroyd-B. A methodology employing the finite difference method to solve the governing equations for axisymmetric free surface flows of Oldroyd-B fluids where the parameter Î² covers the interval [0; 1] is proposed. Thus, this new methodology allows the numerical solutions of the Oldroyd-B model which involves a solvent viscosity (Î² > 0) and purely elastic flows described by the Upper Convected-Maxwell (UCM) (Î² = 0). Moreover, in this approach the extra-stress tensor is combined with the conformation tensor which is approximated implicitly by finite differences which are solved exactly. The momentum equations coupled with the free surface stress conditions are solved using an Elastic Viscous Stress Splitting (EVSS) transformation: this avoid numerical instabilities that can appear when Î² is small. This new technique is verified by an analytic solution for tube flows and also by comparing results from the literature obtained for the flows impacting drop,dieswell and delayed dieswell using the Oldroyd-B model. New results for bouncing drops, dieswell and delayed dieswell using the UCM model are presented. The existing studies for these flows involve constitutive models that employs solvent viscosities such as Oldroyd-B, Phan-Thien- Tanner (PTT) and Finitely Extensibility Nonlinear Elastic (FENE-P) models." xml:lang="en" />
+
+
+  <meta name="DC.subject" content="Diferenças finitas" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Escoamentos viscoelásticos" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Oldroyd-B" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Superfície livre" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="UCM" xml:lang="pt-br" />
+
+  <meta name="DC.subject" content="Finite differences" xml:lang="en" />
+
+  <meta name="DC.subject" content="Free surface" xml:lang="en" />
+
+  <meta name="DC.subject" content="Oldroyd-B" xml:lang="en" />
+
+  <meta name="DC.subject" content="UCM" xml:lang="en" />
+
+  <meta name="DC.subject" content="Viscoelastic flows" xml:lang="en" />
+
+  <meta name="DC.description" content="Tese de Doutorado" xml:lang="pt-br" />
+  <meta name="DC.description" content="Doctoral Thesis" xml:lang="en" />
+  <meta name="DC.description" content="Instituto de Ciências Matemáticas e de Computação, 2020" xml:lang="pt-br" />
+  <meta name="DC.type" content="text" xml:lang="en" />
+  <meta name="DC.publisher" content="Biblioteca Digital de Teses e Dissertações da Universidade de São Paulo" xml:lang="pt-br" />
+  <meta name="DC.publisher" content="Universidade de São Paulo" xml:lang="pt-br" />
+  <meta name="DC.date" content="2020" xml:lang="pt-br" />
+  <meta name="DCTERMS.issued" content="2020-03-25" xml:lang="pt-br" />
+  <meta name="DCTERMS.available" content="2020-09-08" xml:lang="pt-br" />
+  <meta name="DC.identifier" content="tde-08092020-164651" xml:lang="pt-br" />
+
+  <meta name="DC.identifier" content="doi:10.11606/T.55.2020.tde-08092020-164651" xml:lang="pt-br" />
+
+
+  <meta name="citation_language" content="pt-br" />
+  <meta name="citation_title" content="Solução numérica do modelo Oldroyd-B para valores pequenos da razão de viscosidades: aplicação em escoamentos com superfícies livres" />
+  <meta name="citation_keywords" content="Diferenças finitas; Escoamentos viscoelásticos; Oldroyd-B; Superfície livre; UCM" />
+  <meta name="citation_publication_date" content="2020-03-25" />
+  <meta name="citation_online_date" content="2020" />
+  <meta name="citation_author" content="Viezel, Caroline" />
+  <meta name="citation_dissertation_institution" content="Universidade de São Paulo" />
+  <meta name="citation_publisher" content="Biblioteca Digital de Teses e Dissertações da Universidade de São Paulo" />
+  <meta name="citation_abstract_html_url" content="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-08092020-164651/" />
+
+  <meta name="citation_pdf_url" content="http://www.teses.usp.br/teses/disponiveis/55/55134/tde-08092020-164651/publico/CarolineViezel_revisada.pdf" />
+
+
+  <meta name="citation_doi" content="10.11606/T.55.2020.tde-08092020-164651" />
+
+
+  <script type="text/javascript" src="/templates/bdtd/js/nospam.js"></script>
+  <script type="text/javascript" src="/templates/bdtd/js/jquery-latest.js"></script>
+  <script type="text/javascript" src="/estante/site/lib/jquery/jquery-ui.min.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="/barra/barra.js"  charset="utf-8"></script>
+<div id="Site">
+  <div id="SiteBackground">
+    <div id="Cabecalho">
+      <div id="CabecalhoBarraUSP">&nbsp;</div>
+      <div id="CabecalhoTeses"><a id="HomeLink" href="/?lang=pt-br" title="Home"></a></div>
+      <div id="CabecalhoImagens">
+        <div class="moduletable"><noscript><div class="message">Sorry, but Javascript is not enabled in your browser!</div></noscript>
+<script language="javascript" type="text/javascript">
+<!--
+var embedSIRCSS = '<' + 'style type="text/css" media="all">'
++ '@import "/modules/mod_jw_sir/mod_jw_sir/mod_jw_sir.css";'
++ 'ul#jw-sir,ul#jw-sir li#jw-sir-loading {width:167px;height:69px;}'
++ '</' + 'style>';
+document.write(embedSIRCSS);
+-->
+</script>
+<script type="text/javascript" src="/modules/mod_jw_sir/mod_jw_sir/mod_jw_sir.js"></script>
+<script type="text/javascript">var delay=5000;var transition=40;var preLoader='jw-sir-loading';</script>
+<ul id="jw-sir" class="">
+  <li id="jw-sir-loading"></li><li><img src="/templates/bdtd/banner/foto06.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto07.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto04.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto02.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto01.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto09.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto03.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto05.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto10.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li><li><img src="/templates/bdtd/banner/foto08.png" title="JoomlaWorks Simple Image Rotator" alt="JoomlaWorks Simple Image Rotator" /></li></ul>
+        </div>
+      </div>
+    </div>
+    <div id="Corpo">
+      <div class="CorpoDivisao">
+        <div id="CorpoMenuTopo">&nbsp;</div>
+      </div>
+      <div class="CorpoDivisao">
+        <div id="CorpoReferencia"><span class="breadcrumbs pathway"><a href="/?&amp;lang=pt-br" class="pathway">Inic&iacute;o</a></span></div>
+        <div id="CorpoIdioma"><div id="jflanguageselection"><div class="rawimages"><span id="active_language"><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-08092020-164651/?&amp;lang=pt-br"><img src="/components/com_joomfish/images/flags/pt-br.gif" alt="Português (Brasil)" title="Português (Brasil)" /></a></span><span ><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-08092020-164651/?&amp;lang=en"><img src="/components/com_joomfish/images/flags/en.gif" alt="English (United Kingdom)" title="English (United Kingdom)" /></a></span><span ><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-08092020-164651/?&amp;lang=es"><img src="/components/com_joomfish/images/flags/es.gif" alt="EspañSpanish Formal International)" title="EspañSpanish Formal International)" /></a></span><span ><a href="https://www.teses.usp.br/teses/disponiveis/55/55134/tde-08092020-164651/?&amp;lang=fr"><img src="/components/com_joomfish/images/flags/fr.gif" alt="French (Fr)" title="French (Fr)" /></a></span></div></div>
+        </div>
+      </div>
+      <div class="CorpoDivisao">
+        <div class="CorpoEstante">&nbsp;
+<!-- AddThis Button BEGIN -->
+<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4e9871e452a1ada6"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0" /></a>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e9871e452a1ada6"></script>
+<!-- AddThis Button END -->
+        </div>
+        <div class="bdPanel"><script type="text/javascript" src="http://www.teses.usp.br/estante/widget/estanteWidget.js"></script>
+          <div id="estante"></div>
+          <form action="" method="post">
+            <input type="hidden" name="evAutor" value="Viezel, Caroline" />
+            <input type="hidden" name="evTitulo" value="Solução numérica do modelo Oldroyd-B para valores pequenos da razão de viscosidades: aplicação em escoamentos com superfícies livres" />
+            <input type="hidden" name="evAno" value="2020" />
+            <input type="hidden" name="evID" value="tde-08092020-164651" />
+            <input type="hidden" name="evIdioma" value="pt-br" />
+          </form>
+        </div>
+      </div>
+      <div class="CorpoDivisao">
+        <div class="CorpoServico">&nbsp;</div>
+        <div class="bdPanelServico">
+          <br />
+          <br />
+          <div class="menuTabServico"><a id="toogleServico" href="javascript: void(0);"><img src="/templates/bdtd/images/add.png" alt="Servi&ccedil;os" title="Servi&ccedil;os" border="0" /></a></div>
+          <div class="menuPanelServico" id="menuServico">
+            <div class="conteudoPanel">
+              <div class="menuTitulo">Servi&ccedil;os</div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="#referencias">Trabalhos decorrentes</a></div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="javascript: void(0);">Estatist&iacute;cas</a></div>
+              <div class="menuItem">&nbsp;&nbsp;<div class="menuItemTitulo"><a href="javascript: window.open('/stats.php?id=tde-08092020-164651&amp;t=v&amp;lang=pt-br','','');"><img width="12" height="13" src="/images/chart_bar.png" alt="Visitas" border="0" /> Visitas</a></div><div class="menuItemValor"></div></div>
+              <div class="menuItem">&nbsp;&nbsp;<div class="menuItemTitulo"><a href="javascript: window.open('/stats.php?id=tde-08092020-164651&amp;t=d&amp;lang=pt-br','','');"><img width="12" height="13" src="/images/chart_bar.png" alt="Downloads" border="0" /> Downloads</a></div><div class="menuItemValor"></div></div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="javascript: window.open('/cite.php?id=tde-08092020-164651&amp;lang=pt-br','','width=640,height=480,resizable=yes,scrollbars=1,menubar=no');">Como citar</a></div>
+              <hr class="servico"/>
+              <div class="menuItem"><a href="javascript: window.open('/marc.php?id=tde-08092020-164651&amp;lang=pt-br','','width=640,height=480,resizable=yes,scrollbars=1,menubar=no');">Formato MARC</a></div>
+              <div class="menuItem"><a href="javascript: window.open('/xml.php?id=tde-08092020-164651','','width=640,height=480,resizable=yes,scrollbars=1,menubar=no');">Formato OAI DC</a></div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          $("#toogleServico").click(function () {
+	    $("#menuServico").slideToggle("fast");
+	  });
+        </script>
+        <div class="CorpoServicoDivisao">&nbsp;</div>
+      </div>
+      <div class="CorpoDivisao">
+        <div id="CorpoConteudoDocumento">
+          <div id="CorpoTexto">
+<div class="DocumentoTitulo">Tese de Doutorado</div>
+
+<div class="DocumentoTituloTexto">DOI</div><div class="DocumentoTexto">https://doi.org/10.11606/T.55.2020.tde-08092020-164651</div>
+
+<div class="DocumentoTituloTexto">Documento</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=12&amp;Itemid=77&amp;lang=pt-br">Tese de Doutorado</a></div>
+<div class="DocumentoTituloTexto">Autor</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=17&amp;Itemid=160&amp;id=07A97690FE50&amp;lang=pt-br">Viezel, Caroline</a> (<a href="http://dedalus.usp.br/F/?func=scan&amp;scan_code=AUT&amp;scan_start=Viezel, Caroline" target="_blank">Cat&aacute;logo USP</a>)</div>
+<div class="DocumentoTituloTexto">Nome completo</div><div class="DocumentoTexto">Caroline Viezel</div>
+
+<div class="DocumentoTituloTexto">E-mail</div><div class="DocumentoTexto"><a href="JavaScript:;" onclick="JavaScript: showEmail('cviezel','usp.br');" onmouseover="JavaScript: window.defaultStatus='E-mail';">E-mail</a></div>
+
+<div class="DocumentoTituloTexto">Unidade da USP</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=30&amp;Itemid=162&amp;id=55&amp;lang=pt-br">Instituto de Ciências Matemáticas e de Computação</a></div>
+<div class="DocumentoTituloTexto">&Aacute;rea do Conhecimento</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=9&amp;Itemid=159&amp;id=55134&amp;prog=55002&amp;exp=0&amp;lang=pt-br">Ciências de Computação e Matemática Computacional</a></div>
+<div class="DocumentoTituloTexto">Data de Defesa</div><div class="DocumentoTexto"><a href="/index.php?option=com_jumi&amp;fileid=29&amp;Itemid=158&amp;id=2020&amp;lang=pt-br">2020-03-25</a></div>
+<div class="DocumentoTituloTexto">Imprenta</div><div class="DocumentoTexto">São Carlos, 2020</div>
+
+<div class="DocumentoTituloTexto">Orientador</div><div class="DocumentoTexto">
+
+<a href="/index.php?option=com_jumi&amp;fileid=14&amp;Itemid=161&amp;id=37A2A0593433&amp;lang=pt-br">Tomé, Murilo Francisco</a> (<a href="http://dedalus.usp.br/F/?func=scan&amp;scan_code=AUT&amp;scan_start=Tomé, Murilo Francisco" target="_blank">Cat&aacute;logo USP</a>)<br />
+
+</div>
+
+
+<div class="DocumentoTituloTexto">Banca examinadora</div><div class="DocumentoTexto">
+
+Tomé, Murilo Francisco (Presidente)<br />
+
+Cruz, Daniel Onofre de Almeida<br />
+
+Kurokawa, Fernando Akira<br />
+
+Souza, Leandro Franco de<br />
+
+</div>
+
+<div class="DocumentoTituloTexto">T&iacute;tulo em portugu&ecirc;s</div><div class="DocumentoTexto">Solução numérica do modelo Oldroyd-B para valores pequenos da razão de viscosidades: aplicação em escoamentos com superfícies livres</div>
+
+<div class="DocumentoTituloTexto">Palavras-chave em portugu&ecirc;s</div><div class="DocumentoTexto">
+
+Diferenças finitas<br />
+
+Escoamentos viscoelásticos<br />
+
+Oldroyd-B<br />
+
+Superfície livre<br />
+
+UCM<br />
+
+</div>
+
+<div class="DocumentoTituloTexto2">Resumo em portugu&ecirc;s</div>
+<div class="DocumentoTextoResumo">Esse trabalho trata do desenvolvimento de um método numérico para simular escoamentos axissimétricos com superfícies livres modelados pela equação constitutiva Oldroyd-B. Uma nova metodologia utilizando o método de diferenças finitas para resolver as equações governantes de escoamentos de fluidos Oldroyd-B em que o parâmetro &beta; pode assumir valores no intervalo [0; 1] é proposta. Assim, fazendo &beta; = 0, esta técnica permite simular escoamentos de fluidos puramente elásticos governados pela equação constitutiva Upper Convected-Maxwell (UCM). Nessa nova estratégia, o tensor tensão extra é calculado em função do tensor conformação que é aproximado implicitamente pelo método de diferenças finitas cujas equações são resolvidas analiticamente. Para obter a solução da equação de conservação de quantidade de movimento e as condições de contorno na superfície livre, emprega-se uma transformação Elastic Viscous Stress Splitting (EVSS) que evita instabilidades numéricas quando &beta; é pequeno. O código numérico é verificado utilizando uma solução analítica para escoamentos axissimétricos em um tubo e também, comparando resultados obtidos na literatura para os escoamentos impacting drop, inchamento do extrudado e inchamento retardado do extrudado de fluidos Oldroyd-B. Novos resultados desses escoamentos são apresentados utilizando o modelo UCM e resultados originais obtidos da simulação dos escoamentos bouncing drops e inchamento retardado do extrudado de fluidos UCM são incluídos; os resultados existentes são decorrentes de modelos viscoelásticos com adição de solventes, como por exemplo, Oldroyd-B, Phan-Thien-Tanner (PTT), FENE-P (Finitely Extensibility Nonlinear Elastic), entre outros.</div>
+
+<div class="DocumentoTituloTexto">T&iacute;tulo em ingl&ecirc;s</div><div class="DocumentoTexto">Numerical solution of the Oldroyd-B model for small values of the viscosity ratio: application to free surface flows</div>
+
+<!-- BEGIN bl_palavras_chave_alternativo -->
+<div class="DocumentoTituloTexto">Palavras-chave em ingl&ecirc;s</div><div class="DocumentoTexto">
+
+Finite differences<br/>
+
+Free surface<br/>
+
+Oldroyd-B<br/>
+
+UCM<br/>
+
+Viscoelastic flows<br/>
+
+</div>
+
+<div class="DocumentoTituloTexto2">Resumo em ingl&ecirc;s</div>
+<div class="DocumentoTextoResumo">This work deals with the development of a numerical method to simulate axisymmetric free surface flows governed by the constitutive equation Oldroyd-B. A methodology employing the finite difference method to solve the governing equations for axisymmetric free surface flows of Oldroyd-B fluids where the parameter &beta; covers the interval [0; 1] is proposed. Thus, this new methodology allows the numerical solutions of the Oldroyd-B model which involves a solvent viscosity (&beta; &gt; 0) and purely elastic flows described by the Upper Convected-Maxwell (UCM) (&beta; = 0). Moreover, in this approach the extra-stress tensor is combined with the conformation tensor which is approximated implicitly by finite differences which are solved exactly. The momentum equations coupled with the free surface stress conditions are solved using an Elastic Viscous Stress Splitting (EVSS) transformation: this avoid numerical instabilities that can appear when &beta; is small. This new technique is verified by an analytic solution for tube flows and also by comparing results from the literature obtained for the flows impacting drop,dieswell and delayed dieswell using the Oldroyd-B model. New results for bouncing drops, dieswell and delayed dieswell using the UCM model are presented. The existing studies for these flows involve constitutive models that employs solvent viscosities such as Oldroyd-B, Phan-Thien- Tanner (PTT) and Finitely Extensibility Nonlinear Elastic (FENE-P) models.</div>
+
+<div class="DocumentoTituloTexto4">&nbsp;</div>
+<div class="DocumentoTituloTexto2"></div>
+
+<div class="DocumentoTituloTexto3"><b>AVISO - A consulta a este documento fica condicionada na aceita&ccedil;&atilde;o das seguintes condi&ccedil;&otilde;es de uso:</b><br />Este trabalho &eacute; somente para uso privado de atividades de pesquisa e ensino. N&atilde;o &eacute; autorizada sua reprodu&ccedil;&atilde;o para quaisquer fins lucrativos. Esta reserva de direitos abrange a todos os dados do documento bem como seu conte&uacute;do. Na utiliza&ccedil;&atilde;o ou cita&ccedil;&atilde;o de partes do documento &eacute; obrigat&oacute;rio mencionar nome da pessoa autora do trabalho.</div>
+
+
+<div class="DocumentoTituloTexto2"><a href="/teses/disponiveis/55/55134/tde-08092020-164651/publico/CarolineViezel_revisada.pdf">CarolineViezel_revisada.pdf</a>  (22.89 Mbytes)</div>
+
+
+
+
+<div class="DocumentoTituloTexto">Data de Publica&ccedil;&atilde;o</div><div class="DocumentoTexto">2020-09-08</div>
+<div class="DocumentoTituloTexto4">&nbsp;</div>
+<div class="CaixaReferencia">
+<div class="DocumentoTitulo"><a name="referencias">Trabalhos decorrentes</a></div>
+
+
+<div class="DocumentoTituloTexto3"><b>AVISO</b>: Saiba o que s&atilde;o os trabalhos decorrentes <a href='http://www.teses.usp.br/index.php?option=com_content&amp;view=article&amp;id=64&amp;Itemid=194&amp;lang=pt-br'>clicando aqui</a>.</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="Rodape">
+      <div id="Direitos">
+        <div class="moduletable">
+          <div>Todos os direitos da tese/disserta&ccedil;&atilde;o s&atilde;o de seus autores<br />
+          CeTI-SC/STI<br />
+          Biblioteca Digital de Teses e Disserta&ccedil;&otilde;es da USP. Copyright &#169; 2001-2020. Todos os direitos reservados.<br /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7046076-2");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+</body>
+</html>
